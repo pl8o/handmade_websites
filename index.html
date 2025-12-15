@@ -6,21 +6,15 @@
 <title>HANDMADE WEBSITES</title>
 
 <style>
-/* =====================================================
-   ROOT VARIABLES
-   ===================================================== */
-:root{
+:root {
   --gap: clamp(8px, 1.6vmin, 20px);
-  --border: clamp(3px, 0.6vmin, 10px);
   --wrap-padding: 12px;
   --grid-width: 100vw;
   --tile-size: 120px;
   --primary-height-ratio: 0.5;
 }
 
-/* =====================================================
-   GLOBAL STYLES
-   ===================================================== */
+/* GLOBAL STYLES */
 html, body {
   margin: 0;
   background: #000;
@@ -43,9 +37,7 @@ html, body {
   align-items: center;
 }
 
-/* =====================================================
-   PRIMARY VIDEO BOX
-   ===================================================== */
+/* PRIMARY VIDEO */
 .primary {
   width: var(--grid-width);
   height: calc(var(--grid-width) * var(--primary-height-ratio));
@@ -53,7 +45,6 @@ html, body {
   border-radius: 6px;
   overflow: hidden;
   position: relative;
-  border: calc(var(--border)/1.2) solid #000;
 }
 
 .primary video {
@@ -62,31 +53,23 @@ html, body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  z-index: 1;
 }
 
-/* =====================================================
-   TITLE OVERLAY
-   ===================================================== */
+/* TITLE COLOR CYCLING */
 .primary-title {
   position: absolute;
   inset: 0;
   z-index: 2;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   font-size: clamp(2.5rem, 6vw, 5rem);
   font-weight: 800;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-
   color: rgba(255,255,255,0.65);
   text-shadow: 0 12px 30px rgba(0,0,0,0.6);
-
   pointer-events: none;
-
   animation: titleColorCycle 10s linear infinite;
 }
 
@@ -99,31 +82,23 @@ html, body {
   100% { color: rgba(255, 215, 0, 0.65); }
 }
 
-/* =====================================================
-   SMALL GRID
-   ===================================================== */
+/* SMALL GRID */
 .small-grid {
   width: var(--grid-width);
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(var(--tile-size), 1fr));
-  grid-auto-rows: var(--tile-size);
   gap: var(--gap);
 }
 
-/* =====================================================
-   CARD BASE
-   ===================================================== */
+/* CARD BASE */
 .card {
   position: relative;
   border-radius: 6px;
-  border: calc(var(--border)/1.2) solid #000;
   overflow: hidden;
   display: block;
 }
 
-/* =====================================================
-   IMAGE LINK CARDS
-   ===================================================== */
+/* IMAGE FILLS CARD */
 .card img {
   width: 100%;
   height: 100%;
@@ -131,28 +106,38 @@ html, body {
   display: block;
 }
 
-/* Label overlay */
+/* LABEL */
 .card span {
-  position: absolute;
-  bottom: 6px;
-  left: 6px;
-  right: 6px;
-  background: rgba(0,0,0,0.65);
   padding: 4px 6px;
   font-size: 0.7rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   text-align: center;
+  background: rgba(0,0,0,0.65);
+  display: block;
 }
 
-/* Hover feedback */
+/* HOVER EFFECT */
 .card:hover {
   transform: translateY(-6px);
   box-shadow: 0 18px 36px rgba(0,0,0,0.45);
   transition: 0.15s;
 }
 
-/* Placeholder colors */
+/* PLACEHOLDER CARDS */
+.placeholder {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  width: 100%;
+  height: var(--tile-size); /* ensures placeholder is visible */
+}
+
+.placeholder-dummy {
+  width: 100%;
+  height: 100%;
+}
+
+/* COLORS FOR PLACEHOLDERS */
 .c3 { background: Lime; }
 .c4 { background: Gold; }
 .c5 { background: Magenta; }
@@ -161,7 +146,6 @@ html, body {
 .c8 { background: SlateBlue; }
 .c9 { background: orange; }
 .c10 { background: silver; }
-
 </style>
 </head>
 
@@ -179,104 +163,49 @@ html, body {
   <!-- SMALL GRID -->
   <div class="small-grid" id="smallGrid">
 
-    <!-- BOX 1 — ARMAGEDDON -->
-    <a
-      class="card"
-      href="https://pl8o.github.io/armageddon/index.html"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
+    <!-- 8 REAL BOXES -->
+    <a class="card" href="https://pl8o.github.io/armageddon/" target="_blank">
       <img src="armageddon.png" alt="Armageddon website preview">
       <span>Armageddon</span>
     </a>
-
-    <!-- BOX 2 — THE MATRIX -->
-    <a
-      class="card"
-      href="https://pl8o.github.io/the_matrix/"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
+    <a class="card" href="https://pl8o.github.io/the_matrix/" target="_blank">
       <img src="matrix.png" alt="The Matrix website preview">
       <span>The Matrix</span>
     </a>
-
-    <!-- BOX 3 — THE BERING SEA -->
-    <a
-      class="card"
-      href="https://pl8o.github.io/the_bering_sea/"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <img src="bering_sea.png" alt="The Bering Sea website preview">
+    <a class="card" href="https://pl8o.github.io/the_bering_sea/" target="_blank">
+      <img src="bering-sea.png" alt="The Bering Sea website preview">
       <span>The Bering Sea</span>
     </a>
-
-    <!-- BOX 4 — STORM CHASERS-->
-    <a
-      class="card"
-      href="https://pl8o.github.io/storm_chasers/"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <img src="stormchasers.png" alt="The Storm Chasers website preview">
+    <a class="card" href="https://pl8o.github.io/storm_chasers/" target="_blank">
+      <img src="stormchasers.png" alt="Storm Chasers website preview">
       <span>Storm Chasers</span>
     </a>
+    <a class="card" href="https://pl8o.github.io/ufo/" target="_blank">
+      <img src="ufo.png" alt="UFO website preview">
+      <span>UFO</span>
+    </a>
+    <a class="card" href="https://pl8o.github.io/candle/" target="_blank">
+      <img src="candle.png" alt="Candle website preview">
+      <span>Candle</span>
+    </a>
+    <a class="card" href="https://pl8o.github.io/link_cascade/" target="_blank">
+      <img src="link_cascade.png" alt="Link Cascade website preview">
+      <span>Link Cascade</span>
+    </a>
+    <a class="card" href="https://pl8o.github.io/the_box/" target="_blank">
+      <img src="box.png" alt="The Box website preview">
+      <span>The Box</span>
+    </a>
 
-     <!-- BOX 5 — UFO-->
-     <a
-     class="card"
-     href="https://pl8o.github.io/ufo/"
-     target="_blank"
-     rel="noopener noreferrer"
-   >
-     <img src="ufo.png" alt="The UFO website preview">
-     <span>UFO</span>
-   </a>
-
-    <!-- BOX 6 — CANDLE-->
-    <a
-    class="card"
-    href="https://pl8o.github.io/candle/"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    <img src="candle.png" alt="The Candle website preview">
-    <span>Candle</span>
-  </a>
-
-   <!-- BOX 7 — LINK CASCADE-->
-   <a
-   class="card"
-   href="https://pl8o.github.io/link_cascade/"
-   target="_blank"
-   rel="noopener noreferrer"
- >
-   <img src="link_cascade.png" alt="The Link Cascade website preview">
-   <span>Link Cascade</span>
- </a>
-
-  <!-- BOX 8 — THE BOX-->
-  <a
-  class="card"
-  href="https://pl8o.github.io/the_box/"
-  target="_blank"
-  rel="noopener noreferrer"
->
-  <img src="box.png" alt="The Box website preview">
-  <span>The Box</span>
-</a>
-
-
-    <!-- PLACEHOLDERS -->
-    <div class="card c3"></div>
-    <div class="card c4"></div>
-    <div class="card c5"></div>
-    <div class="card c6"></div>
-    <div class="card c7"></div>
-    <div class="card c8"></div>
-    <div class="card c9"></div>
-    <div class="card c10"></div>
+    <!-- 8 PLACEHOLDERS -->
+    <div class="card placeholder c3"><div class="placeholder-dummy"></div></div>
+    <div class="card placeholder c4"><div class="placeholder-dummy"></div></div>
+    <div class="card placeholder c5"><div class="placeholder-dummy"></div></div>
+    <div class="card placeholder c6"><div class="placeholder-dummy"></div></div>
+    <div class="card placeholder c7"><div class="placeholder-dummy"></div></div>
+    <div class="card placeholder c8"><div class="placeholder-dummy"></div></div>
+    <div class="card placeholder c9"><div class="placeholder-dummy"></div></div>
+    <div class="card placeholder c10"><div class="placeholder-dummy"></div></div>
 
   </div>
 
@@ -286,8 +215,6 @@ html, body {
 <script>
 (function () {
   const grid = document.getElementById('smallGrid');
-  if (!grid) return;
-
   const wrapPadding = 12;
 
   function update() {
@@ -295,10 +222,7 @@ html, body {
     const vw = Math.max(document.documentElement.clientWidth, 320);
     const gridWidth = vw - (wrapPadding * 2);
     const gap = parseFloat(getComputedStyle(grid).gap) || 16;
-
-    const tileSize = Math.floor(
-      (gridWidth - (cols - 1) * gap) / cols
-    );
+    const tileSize = Math.floor((gridWidth - (cols - 1) * gap) / cols);
 
     document.documentElement.style.setProperty('--grid-width', gridWidth + 'px');
     document.documentElement.style.setProperty('--tile-size', tileSize + 'px');
