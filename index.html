@@ -1,274 +1,242 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>HAND MADE WEBSITES</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HANDMADE WEBSITES</title>
 
 <style>
-  /* =========================
-     1. ROOT VARIABLES
-     ========================= */
-  :root{
-    --gap: clamp(8px, 1.6vmin, 20px);
-    --border: clamp(3px, 0.6vmin, 10px);
-    --wrap-padding: 12px;
-    --txt-dark: #000;
-    --txt-light: #fff;
+/* =====================================================
+   ROOT VARIABLES
+   ===================================================== */
+:root{
+  --gap: clamp(8px, 1.6vmin, 20px);
+  --border: clamp(3px, 0.6vmin, 10px);
+  --wrap-padding: 12px;
+  --grid-width: 100vw;
+  --tile-size: 120px;
+  --primary-height-ratio: 0.5;
+}
 
-    --grid-width: 100vw;
-    --tile-size: 120px;
-    --primary-height-ratio: 0.5;
-  }
+/* =====================================================
+   GLOBAL STYLES
+   ===================================================== */
+html, body {
+  margin: 0;
+  background: #000;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #fff;
+}
 
-  /* =========================
-     2. GLOBAL STYLES
-     ========================= */
-  html, body {
-    height:100%;
-    margin:0;
-    background:#000;
-    font-family: Arial, Helvetica, sans-serif;
-    color: var(--txt-light);
-    /* Note: keep body overflow visible so page can scroll if needed.
-       The iframes themselves are hidden-scrolling via CSS below. */
-  }
+.wrap {
+  width: 100%;
+  padding: var(--wrap-padding);
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+}
 
-  .wrap {
-    width:100%;
-    padding: var(--wrap-padding);
-    box-sizing:border-box;
-    display:flex;
-    justify-content:center;
-  }
+.content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-  .content {
-    width:100%;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-  }
+/* =====================================================
+   PRIMARY VIDEO BOX
+   ===================================================== */
+.primary {
+  width: var(--grid-width);
+  height: calc(var(--grid-width) * var(--primary-height-ratio));
+  margin-bottom: var(--gap);
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+  border: calc(var(--border)/1.2) solid #000;
+}
 
-  /* =========================
-     3. PRIMARY BOX (VIDEO)
-     ========================= */
-  .primary {
-    width: calc(var(--grid-width));
-    height: calc(var(--grid-width) * var(--primary-height-ratio));
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background: orange;
-    border: calc(var(--border)/1.2) solid #000;
-    border-radius:6px;
-    overflow: hidden;
-    margin-bottom: var(--gap);
-    background-clip: padding-box;
-  }
+.primary video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
 
-  .primary.colorme_main { 
-    animation: bgcolorchange 10s linear infinite; 
-  }
+/* =====================================================
+   TITLE OVERLAY
+   ===================================================== */
+.primary-title {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
 
-  @keyframes bgcolorchange {
-    0% { background: gold; } 10% { background: orange; } 20% { background:#ff6600; }
-    30% { background: OrangeRed; } 40% { background: magenta; } 50% { background: HotPink; }
-    60% { background: violet; } 70% { background: #ffcc00; } 80% { background: gold; } 100% { background: gold; }
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  /* Video styling */
-  .primary video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display:block;
-  }
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
 
-  /* =========================
-     4. SMALL GRID
-     ========================= */
-  .small-grid {
-    width: calc(var(--grid-width));
-    display:grid;
-    grid-template-columns: repeat(auto-fit, minmax(var(--tile-size), 1fr));
-    gap: var(--gap);
-    grid-auto-rows: var(--tile-size);
-    box-sizing:border-box;
-  }
+  color: rgba(255,255,255,0.65);
+  text-shadow: 0 12px 30px rgba(0,0,0,0.6);
 
-  /* Tiles/cards */
-  .card {
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border: calc(var(--border)/1.2) solid #000;
-    border-radius:6px;
-    overflow:hidden;
-    padding:6px;
-    background-clip: padding-box;
-    color: var(--txt-dark);
-    user-select:none;
-    position:relative;
-    text-decoration:none;
-  }
+  pointer-events: none;
 
-  .card .inner {
-    width:100%;
-    height:100%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    z-index: 2; /* keep inner content above iframe */
-    pointer-events: none; /* avoid blocking iframe interactions */
-  }
+  animation: titleColorCycle 10s linear infinite;
+}
 
-  .promo { margin:0; font-weight:600; color: inherit; }
+@keyframes titleColorCycle {
+  0%   { color: rgba(255, 215, 0, 0.65); }
+  20%  { color: rgba(255, 165, 0, 0.65); }
+  40%  { color: rgba(255, 0, 255, 0.65); }
+  60%  { color: rgba(138, 43, 226, 0.65); }
+  80%  { color: rgba(0, 255, 255, 0.65); }
+  100% { color: rgba(255, 215, 0, 0.65); }
+}
 
-  /* Tile colors */
-  .c-green{ background: green; }
-  .c-slate{ background: SlateBlue; color:var(--txt-light); }
-  .c-red{ background: OrangeRed; color:var(--txt-light); }
-  .c-aqua{ background: aqua; color:var(--txt-dark); }
-  .c-orange{ background: orange; color:var(--txt-dark); }
-  .c-blv{ background: BlueViolet; color:var(--txt-light); }
-  .c-magenta{ background: magenta; color:var(--txt-dark); }
-  .c-ff{ background:#ffcc00; color:var(--txt-dark); }
-  .c-blue{ background: blue; color:var(--txt-light); }
-  .c-violet{ background: violet; color:var(--txt-dark); }
-  .c-lime{ background: lime; color:var(--txt-dark); }
-  .c-gold{ background: gold; color:var(--txt-dark); }
+/* =====================================================
+   SMALL GRID
+   ===================================================== */
+.small-grid {
+  width: var(--grid-width);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--tile-size), 1fr));
+  grid-auto-rows: var(--tile-size);
+  gap: var(--gap);
+}
 
-  /* Hover effect */
-  .card:hover, .card:focus { transform: translateY(-6px); box-shadow: 0 18px 36px rgba(0,0,0,0.45); transition:.15s; }
+/* =====================================================
+   CARD BASE
+   ===================================================== */
+.card {
+  position: relative;
+  border-radius: 6px;
+  border: calc(var(--border)/1.2) solid #000;
+  overflow: hidden;
+  display: block;
+}
 
-  /* HOMELINK */
-  .homelink { text-align:center; margin:18px 0; }
-  .homelink a { color:inherit; text-decoration:none; background:rgba(255,255,255,0.06); padding:8px 12px; border-radius:6px; }
+/* =====================================================
+   IMAGE LINK CARDS
+   ===================================================== */
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
 
-  /* =========================
-     IFRAME: exact Box-1 style used for Box 1 & Box 2
-     - container absolutely covers the card
-     - iframe itself fills container
-     - overflow hidden to hide scrollbars
-     ========================= */
-  .iframe-container {
-    position: absolute;
-    inset: 0;           /* top:0; right:0; bottom:0; left:0; */
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    z-index: 1;
-  }
+/* Label overlay */
+.card span {
+  position: absolute;
+  bottom: 6px;
+  left: 6px;
+  right: 6px;
+  background: rgba(0,0,0,0.65);
+  padding: 4px 6px;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+}
 
-  .iframe-container iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: 0;
-    overflow: hidden;   /* hide internal scrollbars */
-    -webkit-overflow-scrolling: auto;
-  }
+/* Hover feedback */
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 36px rgba(0,0,0,0.45);
+  transition: 0.15s;
+}
 
-  /* Hide native scrollbars in iframe where possible (edge cases) */
-  .iframe-container iframe::-webkit-scrollbar {
-    display: none;
-  }
-
-  @media (max-height:420px) {
-    .primary { height: calc(var(--grid-width) * var(--primary-height-ratio)); }
-  }
-
+/* Placeholder colors */
+.c3 { background: Lime; }
+.c4 { background: Gold; }
+.c5 { background: Magenta; }
+.c6 { background: Blue; }
+.c7 { background: Violet; }
+.c8 { background: SlateBlue; }
 </style>
 </head>
+
 <body>
-  <div class="wrap">
-    <div class="content">
 
-      <!-- PRIMARY VIDEO BOX -->
-      <div class="primary colorme_main">
-        <video src="forge.mp4" autoplay muted loop playsinline></video>
-      </div>
+<div class="wrap">
+<div class="content">
 
-      <!-- SMALL GRID -->
-      <div class="small-grid" id="smallGrid">
-
-        <!-- Box 1: borderless iframe, hidden scrollbar (unchanged) -->
-        <div class="card" style="padding:0; border:none; background:none;">
-          <div class="inner"><!-- optional inner text removed to keep same look as original Box 1 --></div>
-          <div class="iframe-container">
-            <iframe src="https://pl8o.github.io/armageddon/index.html" loading="lazy" title="Armageddon"></iframe>
-          </div>
-        </div>
-
-        <!-- Box 2: DUPLICATE OF BOX 1 (your requested link) -->
-        <div class="card" style="padding:0; border:none; background:none;">
-          <div class="inner"><!-- leave empty so iframe sits flush like Box 1 --></div>
-          <div class="iframe-container">
-            <!-- THIS is the matrix link you provided -->
-            <iframe src="https://pl8o.github.io/the_matrix/" loading="lazy" title="The Matrix"></iframe>
-          </div>
-        </div>
-
-        <!-- Other tiles remain as clickable cards (unchanged appearance) -->
-        <a class="card c-slate"  href="matrix_1.html"><div class="inner"><h2 class="promo">BOX 3<br>SLATEBLUE</h2></div></a>
-        <a class="card c-red"    href="matrix_1.html"><div class="inner"><h2 class="promo">BOX 4<br>ORANGERED</h2></div></a>
-        <a class="card c-aqua"   href="matrix_1.html"><div class="inner"><h2 class="promo">BOX 5<br>AQUA</h2></div></a>
-        <a class="card c-orange" href="matrix_1.html"><div class="inner"><h2 class="promo">BOX 6<br>ORANGE</h2></div></a>
-        <a class="card c-blv"    href="matrix_1.html"><div class="inner"><h2 class="promo">BOX 7<br>BLUEVIOLET</h2></div></a>
-        <a class="card c-magenta" href="matrix_1.html"><div class="inner"><h2 class="promo">BOX 8<br>MAGENTA</h2></div></a>
-        <a class="card c-ff"     href="matrix_1.html"><div class="inner"><h2 class="promo">BOX 9<br>#FFCC00</h2></div></a>
-        <a class="card c-blue"   href="matrix_1.html"><div class="inner"><h2 class="promo">BOX 10<br>BLUE</h2></div></a>
-        <a class="card c-violet" href="matrix_1.html"><div class="inner"><h2 class="promo">BOX 11<br>VIOLET</h2></div></a>
-        <a class="card c-lime"   href="matrix_1.html"><div class="inner"><h2 class="promo">BOX 12<br>LIME</h2></div></a>
-        <a class="card c-gold"   href="matrix_1.html"><div class="inner"><h2 class="promo">BOX 13<br>GOLD</h2></div></a>
-
-      </div>
-    </div>
+  <!-- PRIMARY VIDEO + TITLE -->
+  <div class="primary">
+    <video src="forge.mp4" autoplay muted loop playsinline></video>
+    <div class="primary-title">HANDMADE WEBSITES</div>
   </div>
 
-  <div class="homelink">
-    <a href="1_template_gallery.html" target="_blank" rel="noopener">BACK HOME</a>
+  <!-- SMALL GRID -->
+  <div class="small-grid" id="smallGrid">
+
+    <!-- BOX 1 — ARMAGEDDON -->
+    <a
+      class="card"
+      href="https://pl8o.github.io/armageddon/index.html"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <img src="armageddon.png" alt="Armageddon website preview">
+      <span>Armageddon</span>
+    </a>
+
+    <!-- BOX 2 — THE MATRIX -->
+    <a
+      class="card"
+      href="https://pl8o.github.io/the_matrix/"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <img src="matrix.png" alt="The Matrix website preview">
+      <span>The Matrix</span>
+    </a>
+
+    <!-- PLACEHOLDERS -->
+    <div class="card c3"></div>
+    <div class="card c4"></div>
+    <div class="card c5"></div>
+    <div class="card c6"></div>
+    <div class="card c7"></div>
+    <div class="card c8"></div>
+
   </div>
 
-  <!-- =========================
-       JS: Dynamic tile sizing & grid width
-       (unchanged from your original)
-       ========================= -->
+</div>
+</div>
+
 <script>
 (function () {
   const grid = document.getElementById('smallGrid');
   if (!grid) return;
 
-  let raf = null;
-  const wrapPadding = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--wrap-padding')) || 12;
+  const wrapPadding = 12;
 
   function update() {
     const cols = window.matchMedia('(max-width:700px)').matches ? 2 : 4;
-    const vw = Math.max(document.documentElement.clientWidth || window.innerWidth, 320);
-
+    const vw = Math.max(document.documentElement.clientWidth, 320);
     const gridWidth = vw - (wrapPadding * 2);
-    const gapPx = parseFloat(getComputedStyle(grid).getPropertyValue('gap')) || 16;
+    const gap = parseFloat(getComputedStyle(grid).gap) || 16;
 
-    const tileSize = Math.floor((gridWidth - (cols - 1) * gapPx) / cols);
+    const tileSize = Math.floor(
+      (gridWidth - (cols - 1) * gap) / cols
+    );
 
     document.documentElement.style.setProperty('--grid-width', gridWidth + 'px');
     document.documentElement.style.setProperty('--tile-size', tileSize + 'px');
   }
 
-  function scheduleUpdate() {
-    if (raf) cancelAnimationFrame(raf);
-    raf = requestAnimationFrame(() => { update(); raf = null; });
-  }
-
-  window.addEventListener('resize', scheduleUpdate);
-  window.addEventListener('orientationchange', () => setTimeout(scheduleUpdate, 120));
-  window.addEventListener('load', () => { scheduleUpdate(); setTimeout(scheduleUpdate, 200); });
-
-  scheduleUpdate();
+  window.addEventListener('resize', update);
+  window.addEventListener('load', update);
 })();
 </script>
+
 </body>
 </html>
+
